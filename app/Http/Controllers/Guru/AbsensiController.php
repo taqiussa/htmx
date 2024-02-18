@@ -18,6 +18,8 @@ class AbsensiController extends Controller
                 ->get(),
             'tanggal' => request('tanggal') ?? date('Y-m-d'),
             'tahun' => '2023 / 2024',
+            'kelas_id' => '',
+            'jam' => ''
         ]);
     }
 
@@ -30,7 +32,12 @@ class AbsensiController extends Controller
         if (!$validate) {
             return back()->withErrors($validate);
         } else {
-            return back()->with($request->all());
+            return to_route('absensi', [
+                'tanggal' => $request->tanggal,
+                'tahun' => $request->tahun,
+                'kelas_id' => $request->kelas_id,
+                'jam' => $request->jam,
+            ]);
         }
     }
 
